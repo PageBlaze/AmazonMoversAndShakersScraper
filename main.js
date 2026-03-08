@@ -1,6 +1,6 @@
 const Apify = require('apify');
 
-Apify.main(async () => {
+(async () => {
     // Open request queue and add start URL
     const requestQueue = await Apify.openRequestQueue();
     await requestQueue.addRequest({
