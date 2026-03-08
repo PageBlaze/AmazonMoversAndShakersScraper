@@ -1,21 +1,16 @@
 FROM apify/actor-node-puppeteer-chrome
 
-# Create app directory and give ownership to default user
-RUN mkdir -p /app && chown -R apify:apify /app
+# Set working directory inside container
+WORKDIR /home/apify/app
 
-WORKDIR /app
-
-# Copy package files
+# Copy package.json first for caching
 COPY package*.json ./
-
-# Switch to apify user (already default in newer images, but explicit is safer)
-USER apify
 
 # Install dependencies
 RUN npm install
 
-# Copy all local files
-COPY --chown=apify:apify . .
+# Copy the rest of your code (main.js, etc.)
+COPY . .
 
-# Run main.js
+# Default command
 CMD ["node", "main.js"]
