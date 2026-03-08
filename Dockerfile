@@ -1,16 +1,14 @@
 FROM apify/actor-node-puppeteer-chrome
 
-# Set working directory
+# Use writable working directory
 WORKDIR /home/apify/app
 
-# Copy package files
+# Copy package.json and package-lock.json first (for dependency install)
 COPY package*.json ./
 
-# Install dependencies (important!)
-RUN npm install --only=prod --no-optional
+# Copy all other files (including main.js)
+COPY . .
 
-# Copy source code
-COPY main.js ./
-
-# Default command
+# Do NOT run npm install — Apify cloud handles this automatically
+# Run main.js
 CMD ["node", "main.js"]
