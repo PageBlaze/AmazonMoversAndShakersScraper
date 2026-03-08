@@ -4,7 +4,7 @@ Apify.main(async () => {
     // Open request queue and add start URL
     const requestQueue = await Apify.openRequestQueue();
     await requestQueue.addRequest({
-        url: 'https://www.amazon.com/gp/movers-and-shakers/electronics',
+        url: 'https://www.amazon.com/gp/movers-and-shakers/hi/ref=zg_bsms_nav_hi_0_boost',
         userData: { label: 'START' }
     });
 
