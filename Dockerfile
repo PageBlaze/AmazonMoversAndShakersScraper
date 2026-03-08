@@ -1,16 +1,14 @@
+# Use the official Puppeteer Apify image
 FROM apify/actor-node-puppeteer-chrome
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /home/apify/app
 
-# Copy package.json first for caching
+# Copy package.json and main.js
 COPY package*.json ./
+COPY main.js ./
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of your code (main.js, etc.)
-COPY . .
+# No RUN npm install! Apify will handle dependencies automatically
 
 # Default command
 CMD ["node", "main.js"]
